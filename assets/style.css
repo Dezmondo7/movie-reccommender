@@ -1,3 +1,4 @@
+
 * {
     background-color: skyblue;
 }
@@ -47,3 +48,13 @@ section.scroll-container {
   .container:hover .overlay {
     opacity: 1;
   }
+
+
+#search-form {
+    border-radius: 5px;
+    margin: 2rem;
+    padding: 1rem;
+    font-size: xx-large;
+    font-family: monospace;
+}
+
