@@ -1,3 +1,8 @@
-* {
-    background-color: skyblue;
+
+#search-form {
+    border-radius: 5px;
+    margin: 2rem;
+    padding: 1rem;
+    font-size: xx-large;
+    font-family: monospace;
 }
