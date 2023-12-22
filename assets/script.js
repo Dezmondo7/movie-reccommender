@@ -24,4 +24,35 @@ function searchMovie(movieName, movieYear) {
         .then((data) => {
             displaySearchResults(data.results);
         });
+
+function displaySearchResults(results) {
+const searchResultsDiv = $('#searchResults');
+searchResultsDiv.empty();
+
+if (results.length === 0) {
+    searchResultsDiv.text('No results found.');
+    return;
+}
+
+const resultList = $('<ul></ul>').css('list-style', 'none').css('padding', '0').css('margin', '0');
+
+$.each(results, function (index, movie) {
+    if (movie.poster_path) {
+        const imageUrl = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
+        const listItem = $('<li></li>')
+            .css('display', 'inline-block')
+            .css('margin', '5px')
+            .append(
+                $('<img>')
+                    .addClass('movie-poster')
+                    .attr('src', imageUrl)
+                    .attr('alt', movie.title)
+                    .data('tmdb-id', movie.id)
+            );
+        resultList.append(listItem);
+    }
+});
+
+searchResultsDiv.append(resultList);
+}
 }
