@@ -1,4 +1,55 @@
 
+* {
+    background-color: skyblue;
+}
+
+#watchlist {
+    border: solid;
+}
+
+section.scroll-container {
+    background-color: #333;
+    overflow: scroll;
+    white-space: nowrap;
+    padding: 10px;
+    display: flex;
+
+}
+  
+  .container {
+    position: relative;
+    width: 50%;
+    padding-left: 30px;
+    
+  }
+  
+  .image {
+    display: block;
+    width: 300px;
+    height: 300px;
+ 
+  }
+  
+  .overlay {
+    position: absolute; 
+    bottom: 0; 
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1; 
+    width: 300px;
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .container:hover .overlay {
+    opacity: 1;
+  }
+
+
 #search-form {
     border-radius: 5px;
     margin: 2rem;
@@ -6,3 +57,4 @@
     font-size: xx-large;
     font-family: monospace;
 }
+
