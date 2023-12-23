@@ -50,11 +50,12 @@ $(document).ready(function (e) {
                 return;
             }
 
+            const limitedResults = results.slice(0, 6) // Display the first 6 results
             // Create a list to hold the search result images
             const resultList = $('<ul></ul>').css('list-style', 'none').css('padding', '0').css('margin', '0');
 
             // Iterate through the results and create list items with movie posters
-            $.each(results, function (index, movie) {
+            $.each(limitedResults, function (index, movie) {
                 if (movie.poster_path) {
                     const imageUrl = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
                     const listItem = $('<li></li>')
