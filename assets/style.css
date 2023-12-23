@@ -11,23 +11,19 @@ section.scroll-container {
     background-color: #333;
     overflow: scroll;
     white-space: nowrap;
-    padding: 10px;
     display: flex;
-
 }
   
   .container {
     position: relative;
-    width: 50%;
-    padding-left: 30px;
-    
+    width: 200px;
+    height: auto;  
   }
   
   .image {
     display: block;
-    width: 300px;
-    height: 300px;
- 
+    width: 200px;
+    height: 150px;
   }
   
   .overlay {
@@ -36,7 +32,7 @@ section.scroll-container {
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.5); /* Black see-through */
     color: #f1f1f1; 
-    width: 300px;
+    width: 200px;
     transition: .5s ease;
     opacity:0;
     color: white;
@@ -49,6 +45,11 @@ section.scroll-container {
     opacity: 1;
   }
 
+  .container button {
+    border-radius: 50%;
+    border: solid;
+    border-color: white;
+  }
 
 #search-form {
     border-radius: 5px;
@@ -58,3 +59,6 @@ section.scroll-container {
     font-family: monospace;
 }
 
+i {
+    border-radius: 50%;
+}
