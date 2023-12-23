@@ -65,4 +65,7 @@ $('#myModalButton').on('click', function () {
 });
 
 
-
+//Code to remove the Movie Trailer once Modal is closed
+$('#exampleModal button.btn-close').on('hidden.bs.modal', function () {
+    $('#exampleModal source').removeAttr('src');
+})
