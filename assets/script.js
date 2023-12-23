@@ -56,3 +56,5 @@ $.each(results, function (index, movie) {
 searchResultsDiv.append(resultList);
 }
 }
+
+
