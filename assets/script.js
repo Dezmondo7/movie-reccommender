@@ -76,7 +76,10 @@ $(document).ready(function (e) {
         }
     }
 
+
     // Function to get movie recommendations using WatchThis API
+
+
     function getMovieRecommendations(movieId) {
         const API_KEY = 'c48b27dfdbmsh0f42e66a3743370p15a5bbjsn7d8a440d2974';
         const url = `https://watchthis.p.rapidapi.com/api/v1/movie?ids=${movieId}`;
@@ -88,12 +91,15 @@ $(document).ready(function (e) {
             },
         };
 
+
         // Fetch movie recommendations using WatchThis API
+
         fetch(url, options)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
+
                 const recommendations = data.related;
 
                 if (Array.isArray(recommendations)) {
@@ -106,6 +112,8 @@ $(document).ready(function (e) {
             })
             .catch((error) => {
                 console.error('Error fetching recommendations:', error);
+
+ 
             });
     }
 
