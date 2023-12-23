@@ -57,4 +57,12 @@ searchResultsDiv.append(resultList);
 }
 }
 
+// Code to attach the Movie Trailer to Modal
+$('#myModalButton').on('click', function () {
+    const src = 'http://www.youtube.com/v/FSi2fJALDyQ&amp;autoplay=1';
+    $("#videoModalLabel").text("movieName");
+    $('#videoModal source').attr('src', src);
+});
+
+
 
