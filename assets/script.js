@@ -1,3 +1,4 @@
+
 // Wait for the document to be fully loaded before executing JavaScript
 $(document).ready(function (e) {
     // When the searchButton is clicked...
@@ -161,3 +162,12 @@ $(document).ready(function (e) {
     }
 
 });
+
+
+
+
+
+// trigger Tooltip
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
