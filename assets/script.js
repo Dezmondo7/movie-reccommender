@@ -77,7 +77,10 @@ $(document).ready(function (e) {
         }
     }
 
-    // Function to get movie recommendations using the WatchThis API
+
+    // Function to get movie recommendations using WatchThis API
+
+
     function getMovieRecommendations(movieId) {
         const API_KEY = 'c48b27dfdbmsh0f42e66a3743370p15a5bbjsn7d8a440d2974';
         const url = `https://watchthis.p.rapidapi.com/api/v1/movie?ids=${movieId}`;
@@ -89,14 +92,72 @@ $(document).ready(function (e) {
             },
         };
 
-        // Fetch movie recommendations using the WatchThis API
+
+        // Fetch movie recommendations using WatchThis API
+
         fetch(url, options)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                // Log movie recommendations to the console
-                console.log('Movie recommendations from WatchThis API:', data);
+
+                const recommendations = data.related;
+
+                if (Array.isArray(recommendations)) {
+                    // If recommendations is an array
+                    displayMovieRecommendations(recommendations);
+                } else {
+                    console.error('Invalid or empty recommendations data:', recommendations);
+                    // Handle the case when recommendations are not as expected
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching recommendations:', error);
+
+ 
             });
     }
+
+    // Function to display movie recommendations based on provided data
+    function displayMovieRecommendations(recommendations) {
+        // Select the container for recommended movies
+        const recommendedMoviesDiv = $('#recommendedMovies');
+        recommendedMoviesDiv.empty(); // Clear any previous recommendations
+
+        // Check if there are no recommendations
+        if (recommendations.length === 0) {
+            recommendedMoviesDiv.text('No recommendations found.'); // Display a message if there are no recommendations
+            return; // Exit the function early if there are no recommendations
+        }
+
+        // Create a list to hold recommended movies' posters
+        const resultList = $('<ul></ul>').css('list-style', 'none').css('padding', '0').css('margin', '0');
+
+        // Loop through the recommendations to create list items with movie posters
+        $.each(recommendations, function (index, movie) {
+            // Check if the movie has a poster path available
+            if (movie.tmdb_poster_path) {
+                // Create the image URL using the movie's poster path
+                const imageUrl = `https://image.tmdb.org/t/p/w200${movie.tmdb_poster_path}`;
+
+                // Create a list item to hold the movie poster image
+                const listItem = $('<li></li>')
+                    .css('display', 'inline-block')
+                    .css('margin', '5px')
+                    .append(
+                        // Create an image element for the movie poster
+                        $('<img>')
+                            .addClass('movie-poster')
+                            .attr('src', imageUrl)
+                            .attr('alt', movie.title)
+                            .data('tmdb-id', movie.id) // Store the movie ID as data
+                    );
+
+                resultList.append(listItem); // Append each movie poster to the list
+            }
+        });
+
+        recommendedMoviesDiv.append(resultList); // Append the list of movie posters to the container
+    }
+
 });
