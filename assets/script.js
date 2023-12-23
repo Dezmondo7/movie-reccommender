@@ -164,10 +164,29 @@ $(document).ready(function (e) {
 });
 
 
+searchResultsDiv.append(resultList);
+}
+}
+
+// Code to attach the Movie Trailer to Modal
+$('#myModalButton').on('click', function () {
+    const src = 'http://www.youtube.com/v/FSi2fJALDyQ&amp;autoplay=1';
+    $("#videoModalLabel").text("movieName");
+    $('#videoModal source').attr('src', src);
+});
+
+
+//Code to remove the Movie Trailer once Modal is closed
+$('#exampleModal button.btn-close').on('hidden.bs.modal', function () {
+    $('#exampleModal source').removeAttr('src');
+})
+
+
 
 
 
 // trigger Tooltip
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
 
