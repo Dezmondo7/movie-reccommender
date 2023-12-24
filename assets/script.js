@@ -16,6 +16,7 @@ $(document).ready(function (e) {
     $('#searchResults').on('click', 'img.movie-poster', function () {
         // Get the movie ID from the clicked image's data attribute
         const movieId = $(this).data('tmdb-id');
+        console.log(movieId);
         // Fetch recommendations for the selected movie
         getMovieRecommendations(movieId);
     });
@@ -103,7 +104,7 @@ $(document).ready(function (e) {
             .then((data) => {
 
                 const recommendations = data.related;
-
+                console.log(recommendations);
                 if (Array.isArray(recommendations)) {
                     // If recommendations is an array
                     displayMovieRecommendations(recommendations);
@@ -151,9 +152,8 @@ $(document).ready(function (e) {
                             .addClass('movie-poster')
                             .attr('src', imageUrl)
                             .attr('alt', movie.title)
-                            .data('tmdb-id', movie.id) // Store the movie ID as data
+                            .data('tmdb-id', movie.tmdb_id) // Store the movie ID as data attribute
                     );
-
                 resultList.append(listItem); // Append each movie poster to the list
             }
         });
@@ -161,23 +161,49 @@ $(document).ready(function (e) {
         recommendedMoviesDiv.append(resultList); // Append the list of movie posters to the container
     }
 
-    searchResultsDiv.append(resultList);
 
-    // Code to attach the Movie Trailer to Modal
-    $('#myModalButton').on('click', function () {
-        const src = 'http://www.youtube.com/v/FSi2fJALDyQ&amp;autoplay=1';
-        $("#videoModalLabel").text("movieName");
-        $('#videoModal source').attr('src', src);
+    // Function to play the movie trailer from YouTube Data API
+    function playMovieTrailer(movieTitle) {
+
+        const apiKey = 'AIzaSyCq21SQXVzzJoeJI6DDRIgKZNtaAtLUUt0';
+        const encodedTitle = encodeURIComponent(movieTitle);
+        const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodedTitle}+trailer&key=${apiKey}`;
+
+        fetch(searchUrl)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                // Check if there are any video results
+                if (data.items && data.items.length > 0) {
+                    const videoId = data.items[0].id.videoId; // Get the video ID of the first result
+                    const trailerSrc = `https://www.youtube.com/embed/${videoId}`;
+                    // Set the trailer source and update modal title
+                    $('#videoModalLabel').text(movieTitle);
+                    $('#videoModal iframe').attr('src', trailerSrc);
+                    // Show the modal
+                    $('#videoModal').modal('show');
+                } else {
+                    console.error('No trailer available for this movie.');
+                    // Log error when there's no trailer available
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching movie trailer:', error);
+                // Log error when there is a problem fetching trailer
+            });
+    }
+
+    // Click event for movie posters to play the trailer
+    $('#recommendedMovies').on('click', 'img.movie-poster', function () {
+        const movieTitle = $(this).attr('alt');
+        playMovieTrailer(movieTitle);
     });
-
 
     //Code to remove the Movie Trailer once Modal is closed
     $('#exampleModal button.btn-close').on('hidden.bs.modal', function () {
         $('#exampleModal source').removeAttr('src');
     })
-
-
-
 
 
     // trigger Tooltip
