@@ -207,23 +207,27 @@ $(document).ready(function (e) {
 
 
 
-//$(document).ready(function() {
+// function to save movie information to local storage
     function saveToLocalStorage(movieInfo) {
+
+        // Retrieve existing watchlist from local storage or initialize an empty array
         let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
+        // Add the new movie information to the watchlist
         watchlist.push(movieInfo);
 
+        // Save the updated watchlist back to local storage
         localStorage.setItem('watchlist', JSON.stringify(watchlist));
     }
 
 
     // Function to display watchlist items in the scroll container
-
     function displayWatchlist() {
         var watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
         $('#watchlist-container').empty();
 
+        // Loop through each movie in the watchlist and add it to the scroll container
         watchlist.forEach(function(movieInfo) {
             var watchlistDiv = $('<div class="container">');
 
@@ -233,8 +237,6 @@ $(document).ready(function (e) {
                 .attr('alt', movieInfo.title)
 
             watchlistDiv.append(imagePoster);
-
-            
             watchlistDiv.append('<div class="overlay">' +
                     '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
                     '<i class="material-symbols-outlined">play_arrow</i></a>' +
@@ -249,13 +251,14 @@ $(document).ready(function (e) {
                 console.log('Play movie: ' + movieInfo.title);
             });
 
+            // Event listener for removing movies from watchlist
             watchlistDiv.find('.delete-movie').click(function() {
                 watchlist = watchlist.filter(function (item) {
                     return item.title !== movieInfo.title;
                 });
-
                 localStorage.setItem('watchlist', JSON.stringify(watchlist));
 
+                // Update the display
                 displayWatchlist();
             })
 
@@ -265,7 +268,7 @@ $(document).ready(function (e) {
         });
     }
 
-            // Add click event for "Add to Watchlist" button in the modal
+            // Event listener for "Add to Watchlist" button in the modal
             $('#myWatchlist').click(function () {
                 // Get movie information from the modal (you may need to adjust this part based on your modal structure)
                 var movieInfo = {
@@ -290,38 +293,6 @@ $(document).ready(function (e) {
 
 
 
-
-//})
-
-/*
-
-
-$(document).ready(function() {
-    // Attach click event to the "Remove From Watchlist" button
-    $('.scroll-container').on('click', '#delete-movie', function() {
-      // Find the closest container and remove it
-      $(this).closest('.container').remove();
-    });
-  });
-*/
-/*
-
-$(document).ready(function() {
-    // Get all elements with the ID "delete-movie"
-    var deleteButtons = $("#delete-movie");
-
-    // Add click event listener to each "Remove From Watchlist" button
-    deleteButtons.click(function() {
-        // Find the parent container and remove it from the scroll container
-        var container = $(this).closest(".container");
-        if (container) {
-            container.remove();
-        }
-    });
-});
-
-
-*/
 
     // trigger Tooltip
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
