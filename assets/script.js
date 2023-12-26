@@ -206,6 +206,123 @@ $(document).ready(function (e) {
     })
 
 
+
+//$(document).ready(function() {
+    function saveToLocalStorage(movieInfo) {
+        let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+        watchlist.push(movieInfo);
+
+        localStorage.setItem('watchlist', JSON.stringify(watchlist));
+    }
+
+
+    // Function to display watchlist items in the scroll container
+
+    function displayWatchlist() {
+        var watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+        $('#watchlist-container').empty();
+
+        watchlist.forEach(function(movieInfo) {
+            var watchlistDiv = $('<div class="container">');
+
+            imagePoster = $('<img>')
+                .addClass('image')
+                .attr('src', movieInfo.image)
+                .attr('alt', movieInfo.title)
+
+            watchlistDiv.append(imagePoster);
+
+            
+            watchlistDiv.append('<div class="overlay">' +
+                    '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
+                    '<i class="material-symbols-outlined">play_arrow</i></a>' +
+                    '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
+                    '<i class="material-symbols-outlined">close</i></a>' +
+                    '</div>');
+
+            
+            // needs more work
+            watchlistDiv.find('.play-movie').click(function() {
+
+                console.log('Play movie: ' + movieInfo.title);
+            });
+
+            watchlistDiv.find('.delete-movie').click(function() {
+                watchlist = watchlist.filter(function (item) {
+                    return item.title !== movieInfo.title;
+                });
+
+                localStorage.setItem('watchlist', JSON.stringify(watchlist));
+
+                displayWatchlist();
+            })
+
+            $('#watchlist-container').append(watchlistDiv)
+
+            
+        });
+    }
+
+            // Add click event for "Add to Watchlist" button in the modal
+            $('#myWatchlist').click(function () {
+                // Get movie information from the modal (you may need to adjust this part based on your modal structure)
+                var movieInfo = {
+                    title: $('#videoModalLabel').text(),
+                    image: $('#recommendedMovies img.movie-poster').attr('src')
+                };
+    
+                // Save the movie information to local storage
+                saveToLocalStorage(movieInfo);
+    
+                // Display the updated watchlist
+                displayWatchlist();
+
+                alert('Movie added to watchlist!');
+
+            
+            });
+
+
+            displayWatchlist();
+    
+
+
+
+
+//})
+
+/*
+
+
+$(document).ready(function() {
+    // Attach click event to the "Remove From Watchlist" button
+    $('.scroll-container').on('click', '#delete-movie', function() {
+      // Find the closest container and remove it
+      $(this).closest('.container').remove();
+    });
+  });
+*/
+/*
+
+$(document).ready(function() {
+    // Get all elements with the ID "delete-movie"
+    var deleteButtons = $("#delete-movie");
+
+    // Add click event listener to each "Remove From Watchlist" button
+    deleteButtons.click(function() {
+        // Find the parent container and remove it from the scroll container
+        var container = $(this).closest(".container");
+        if (container) {
+            container.remove();
+        }
+    });
+});
+
+
+*/
+
     // trigger Tooltip
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));

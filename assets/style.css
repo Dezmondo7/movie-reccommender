@@ -6,9 +6,6 @@
     background-color: skyblue;
 }
 
-#watchlist {
-    border: solid;
-}
 
 section.scroll-container {
     background-color: #333;
@@ -19,15 +16,18 @@ section.scroll-container {
   
   .container {
     position: relative;
-    width: 300px;
+    width: 50%;
     height:100%; 
-    transition: width 2s, height 2s, transform 2s;
+    max-width: 200px;
+    padding: 0%;
+    
   }
   
   .image {
     display: block;
-    width: 300px;
-    height: 100%;
+    width: 100%;
+    height: auto;
+    
   }
   
   .overlay {
@@ -36,20 +36,18 @@ section.scroll-container {
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.5);  /* Black see-through */
     color: #f1f1f1; 
-    width: 300px;
+    width: 100%;
     transition: .5s ease; 
     opacity:0;
-    height: 100%;
     color: white;
     font-size: 20px;
     padding: 20px;
-    
-    /*text-align: center; */
+    text-align: center;
   }
 
   .image:hover {
-    width: 300px;
-    transform: scale(180deg);
+    opacity: 0.5;
+   
   }
 
   .container:hover .overlay {
@@ -66,12 +64,12 @@ section.scroll-container {
 
   }
 
-  #delete-movie {
-    margin: 40px;
+  .delete-movie {
+    margin-left: 30px;
   }
 
-  #play-movie {
-    margin: 40px;
+  .play-movie {
+    margin-right: 30px;
   }
 
 #search-form {
