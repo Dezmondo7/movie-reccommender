@@ -206,6 +206,94 @@ $(document).ready(function (e) {
     })
 
 
+
+// function to save movie information to local storage
+    function saveToLocalStorage(movieInfo) {
+
+        // Retrieve existing watchlist from local storage or initialize an empty array
+        let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+        // Add the new movie information to the watchlist
+        watchlist.push(movieInfo);
+
+        // Save the updated watchlist back to local storage
+        localStorage.setItem('watchlist', JSON.stringify(watchlist));
+    }
+
+
+    // Function to display watchlist items in the scroll container
+    function displayWatchlist() {
+        var watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+        $('#watchlist-container').empty();
+
+        // Loop through each movie in the watchlist and add it to the scroll container
+        watchlist.forEach(function(movieInfo) {
+            var watchlistDiv = $('<div class="container">');
+
+            imagePoster = $('<img>')
+                .addClass('image')
+                .attr('src', movieInfo.image)
+                .attr('alt', movieInfo.title)
+
+            watchlistDiv.append(imagePoster);
+            watchlistDiv.append('<div class="overlay">' +
+                    '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
+                    '<i class="material-symbols-outlined">play_arrow</i></a>' +
+                    '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
+                    '<i class="material-symbols-outlined">close</i></a>' +
+                    '</div>');
+
+            
+            // needs more work
+            watchlistDiv.find('.play-movie').click(function() {
+
+                console.log('Play movie: ' + movieInfo.title);
+            });
+
+            // Event listener for removing movies from watchlist
+            watchlistDiv.find('.delete-movie').click(function() {
+                watchlist = watchlist.filter(function (item) {
+                    return item.title !== movieInfo.title;
+                });
+                localStorage.setItem('watchlist', JSON.stringify(watchlist));
+
+                // Update the display
+                displayWatchlist();
+            })
+
+            $('#watchlist-container').append(watchlistDiv)
+
+            
+        });
+    }
+
+            // Event listener for "Add to Watchlist" button in the modal
+            $('#myWatchlist').click(function () {
+                // Get movie information from the modal (you may need to adjust this part based on your modal structure)
+                var movieInfo = {
+                    title: $('#videoModalLabel').text(),
+                    image: $('#recommendedMovies img.movie-poster').attr('src')
+                };
+    
+                // Save the movie information to local storage
+                saveToLocalStorage(movieInfo);
+    
+                // Display the updated watchlist
+                displayWatchlist();
+
+                alert('Movie added to watchlist!');
+
+            
+            });
+
+
+            displayWatchlist();
+    
+
+
+
+
     // trigger Tooltip
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
