@@ -6,8 +6,11 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movie Recommender</title>
+  <title>FLICK FINDER</title>
   <!-- Bootstrap CSS CDN  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/style.css" />
@@ -20,8 +23,20 @@
 
 <body>
   <section id="header"></section>
-
-  <!-- Header Section-->
+  <!--Header-->
+  <div class="hero">
+      <div class="title">
+        <h1><i class="fa-solid fa-film"></i>FLICK</h1>  
+          <div class="background-text">
+            <span>F</span>
+            <span>I</span>
+            <span>N</span>
+            <span>D</span>
+            <span>E</span>
+            <span>R</span>
+          </div>
+      </div>
+  </div>
 
   <!--Card Section-->
     <div class="img-gallery" id="#">
@@ -106,6 +121,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Code to the JavaScript File -->
   <script src="assets/script.js"></script>
+
+  <!-- Code for the header-->
+  <script>
+    let spanTexts = document.getElementsByTagName("span");
+
+    window.onload = function() {
+      for (spanTexts of spanTexts) {
+        spanTexts.classList.add("active");
+      }
+    }
+  </script>
 
 
 
