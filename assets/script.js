@@ -213,19 +213,11 @@ $(document).ready(function (e) {
         event.target.playVideo();
     }
 
-    //Code to remove the Movie Trailer once Modal is closed
-    // $('#exampleModal button.btn-close').on('hidden.bs.modal', function () {
-    //     $('#exampleModal source').removeAttr('src');
-    // })
-
-    // Event listener for when the modal is hidden
+    // Stop video playing when Modal is closed
     $('#videoModal').on('hidden.bs.modal', function () {
-        // Check if the player reference exists and stop the video if it does
-        if (youtubePlayer !== null && typeof youtubePlayer.stopVideo === 'function') {
-            youtubePlayer.stopVideo();
-        }
+        var memory = $(this).html();
+        $(this).html(memory);
     });
-
 
     // function to save movie information to local storage
     function saveToLocalStorage(movieInfo) {
