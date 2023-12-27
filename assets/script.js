@@ -16,7 +16,6 @@ $(document).ready(function (e) {
     $('#searchResults').on('click', 'img.movie-poster', function () {
         // Get the movie ID from the clicked image's data attribute
         const movieId = $(this).data('tmdb-id');
-        console.log(movieId);
         // Fetch recommendations for the selected movie
         getMovieRecommendations(movieId);
     });
@@ -80,6 +79,7 @@ $(document).ready(function (e) {
     }
 
 
+
     // Function to get movie recommendations using WatchThis API
 
 
@@ -104,7 +104,6 @@ $(document).ready(function (e) {
             .then((data) => {
 
                 const recommendations = data.related;
-                console.log(recommendations);
                 if (Array.isArray(recommendations)) {
                     // If recommendations is an array
                     displayMovieRecommendations(recommendations);
@@ -162,6 +161,7 @@ $(document).ready(function (e) {
     }
 
 
+    let youtubePlayer = null; // Define a global variable to store the YouTube player reference
     // Function to play the movie trailer from YouTube Data API
     function playMovieTrailer(movieTitle) {
 
@@ -183,6 +183,13 @@ $(document).ready(function (e) {
                     $('#videoModal iframe').attr('src', trailerSrc);
                     // Show the modal
                     $('#videoModal').modal('show');
+
+                    // Create a new YouTube player when the modal is shown
+                    youtubePlayer = new YT.Player('videoPlayer', {
+                        events: {
+                            'onReady': onPlayerReady
+                        }
+                    });
                 } else {
                     console.error('No trailer available for this movie.');
                     // Log error when there's no trailer available
@@ -200,14 +207,29 @@ $(document).ready(function (e) {
         playMovieTrailer(movieTitle);
     });
 
+
+    function onPlayerReady(event) {
+        // Handle player readiness if needed
+        // This function will be called when the player is ready
+        // For example, you might want to autoplay the video here
+        event.target.playVideo();
+    }
+
     //Code to remove the Movie Trailer once Modal is closed
-    $('#exampleModal button.btn-close').on('hidden.bs.modal', function () {
-        $('#exampleModal source').removeAttr('src');
-    })
+    // $('#exampleModal button.btn-close').on('hidden.bs.modal', function () {
+    //     $('#exampleModal source').removeAttr('src');
+    // })
+
+    // Event listener for when the modal is hidden
+    $('#videoModal').on('hidden.bs.modal', function () {
+        // Check if the player reference exists and stop the video if it does
+        if (youtubePlayer !== null && typeof youtubePlayer.stopVideo === 'function') {
+            youtubePlayer.stopVideo();
+        }
+    });
 
 
-
-// function to save movie information to local storage
+    // function to save movie information to local storage
     function saveToLocalStorage(movieInfo) {
 
         // Retrieve existing watchlist from local storage or initialize an empty array
@@ -228,7 +250,7 @@ $(document).ready(function (e) {
         $('#watchlist-container').empty();
 
         // Loop through each movie in the watchlist and add it to the scroll container
-        watchlist.forEach(function(movieInfo) {
+        watchlist.forEach(function (movieInfo) {
             var watchlistDiv = $('<div class="container">');
 
             imagePoster = $('<img>')
@@ -238,21 +260,21 @@ $(document).ready(function (e) {
 
             watchlistDiv.append(imagePoster);
             watchlistDiv.append('<div class="overlay">' +
-                    '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
-                    '<i class="material-symbols-outlined">play_arrow</i></a>' +
-                    '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
-                    '<i class="material-symbols-outlined">close</i></a>' +
-                    '</div>');
+                '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
+                '<i class="material-symbols-outlined">play_arrow</i></a>' +
+                '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
+                '<i class="material-symbols-outlined">close</i></a>' +
+                '</div>');
 
-            
+
             // needs more work
-            watchlistDiv.find('.play-movie').click(function() {
+            watchlistDiv.find('.play-movie').click(function () {
 
                 console.log('Play movie: ' + movieInfo.title);
             });
 
             // Event listener for removing movies from watchlist
-            watchlistDiv.find('.delete-movie').click(function() {
+            watchlistDiv.find('.delete-movie').click(function () {
                 watchlist = watchlist.filter(function (item) {
                     return item.title !== movieInfo.title;
                 });
@@ -264,32 +286,32 @@ $(document).ready(function (e) {
 
             $('#watchlist-container').append(watchlistDiv)
 
-            
+
         });
     }
 
-            // Event listener for "Add to Watchlist" button in the modal
-            $('#myWatchlist').click(function () {
-                // Get movie information from the modal (you may need to adjust this part based on your modal structure)
-                var movieInfo = {
-                    title: $('#videoModalLabel').text(),
-                    image: $('#recommendedMovies img.movie-poster').attr('src')
-                };
-    
-                // Save the movie information to local storage
-                saveToLocalStorage(movieInfo);
-    
-                // Display the updated watchlist
-                displayWatchlist();
+    // Event listener for "Add to Watchlist" button in the modal
+    $('#myWatchlist').click(function () {
+        // Get movie information from the modal (you may need to adjust this part based on your modal structure)
+        var movieInfo = {
+            title: $('#videoModalLabel').text(),
+            image: $('#recommendedMovies img.movie-poster').attr('src')
+        };
 
-                alert('Movie added to watchlist!');
+        // Save the movie information to local storage
+        saveToLocalStorage(movieInfo);
 
-            
-            });
+        // Display the updated watchlist
+        displayWatchlist();
+
+        alert('Movie added to watchlist!');
 
 
-            displayWatchlist();
-    
+    });
+
+
+    displayWatchlist();
+
 
 
 
