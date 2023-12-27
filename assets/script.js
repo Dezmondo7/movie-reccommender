@@ -134,6 +134,9 @@ $(document).ready(function (e) {
         // Create a list to hold recommended movies' posters
         const resultList = $('<ul></ul>').css('list-style', 'none').css('padding', '0').css('margin', '0');
 
+        // Create Heading Tags for Recommended Movies
+        const recommendationHeadingEl = $('<h4></h4>').attr('id', 'recommendationHeading').text('Movie Recommendations: ')
+
         // Loop through the recommendations to create list items with movie posters
         $.each(recommendations, function (index, movie) {
             // Check if the movie has a poster path available
@@ -157,7 +160,7 @@ $(document).ready(function (e) {
             }
         });
 
-        recommendedMoviesDiv.append(resultList); // Append the list of movie posters to the container
+        recommendedMoviesDiv.append(recommendationHeadingEl, resultList); // Append the list of movie posters to the container
     }
 
 
