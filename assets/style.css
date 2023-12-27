@@ -7,6 +7,20 @@
 }
 
 
+.img-gallery {
+    width: 90%; /*width of screen set to 90%*/
+    margin: 25px auto 50px; /*Top margin is 100px, left and right are automatically adjusted and bottom is 50px */
+    display: grid; /*Createsa grid layout*/
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    grid-gap: 20px; /* defines grid gap of 30px */
+
+}
+
+.img-gallery img {
+    width: 100%;
+    cursor: pointer; /*adds finger pointer of=ver gallery images*/
+}
+
 section.scroll-container {
     background-color: #333;
     overflow: auto;
