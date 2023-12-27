@@ -209,9 +209,7 @@ $(document).ready(function (e) {
 
 
     function onPlayerReady(event) {
-        // Handle player readiness if needed
-        // This function will be called when the player is ready
-        // For example, you might want to autoplay the video here
+
         event.target.playVideo();
     }
 
