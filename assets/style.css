@@ -55,10 +55,6 @@
   cursor: pointer;
 }
 
-.title a:hover {
-  background-color: aqua;
-}
-
 .background-text {
     width: max-content;
     position: absolute;
@@ -114,17 +110,17 @@
 }
 
 .img-gallery {
-    width: 90%; /*width of screen set to 90%*/
-    margin: 25px auto 50px; /*Top margin is 100px, left and right are automatically adjusted and bottom is 50px */
-    display: grid; /*Createsa grid layout*/
+    width: 90%;
+    margin: 25px auto 50px; 
+    display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-    grid-gap: 20px; /* defines grid gap of 30px */
+    grid-gap: 20px; 
 
 }
 
 .img-gallery img {
     width: 100%;
-    cursor: pointer; /*adds finger pointer of=ver gallery images*/
+    cursor: pointer; 
 }
 
 section.scroll-container {
