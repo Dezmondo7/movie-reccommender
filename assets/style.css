@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    box-sizing: border-box;
 
 }
 
@@ -29,6 +30,7 @@
     width: 100%;
     height: 100vh;
     background: #292929;
+    background-image: url("https://initiate.alphacoders.com/images/818/cropped-1280-768-81856.jpg?2103");
     padding-top: 200px;
 }
 
@@ -49,6 +51,14 @@
     position: relative;
 }
 
+.title a {
+  cursor: pointer;
+}
+
+.title a:hover {
+  background-color: aqua;
+}
+
 .background-text {
     width: max-content;
     position: absolute;
@@ -64,7 +74,7 @@
     font-weight: 700;
     -webkit-text-stroke: 1px rgba(250, 250, 250, 0.3);
     -webkit-text-fill-color: transparent;
-    background-color: #292929;
+    background-color: transparent;
     transform: translateY(100px);
     transition: transform 1s, opacity 0.5s, -webkit-text-stroke-color 0.5s;
     opacity: 0;
