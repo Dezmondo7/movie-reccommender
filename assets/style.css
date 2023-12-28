@@ -3,6 +3,26 @@
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+
+}
+
+.lists li {
+  display: inline-flex;
+  justify-content: center;
+  padding-top: 20px;
+  margin: 0 10px;
+
+}
+
+.lists li a {
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar {
+  background: #292929;
+  justify-items: center;
 }
 
 .hero {
