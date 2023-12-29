@@ -2,8 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    box-sizing: border-box;
-
 }
 
 .lists li {
@@ -32,9 +30,16 @@
     background-image: url("https://images4.alphacoders.com/818/81856.jpg");
     background-size: 1365px, 678px;
     padding-top: 200px;
+    position: relative;
 }
 
 .title img {
+  position: absolute;
+  right: 200px;
+  top: 0px;
+  bottom: -100px;
+  top: 99px;
+  left: -500px;
 }
 
 .hero h1 {
