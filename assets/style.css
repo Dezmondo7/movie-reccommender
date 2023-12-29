@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -30,8 +29,12 @@
     width: 100%;
     height: 100vh;
     background: #292929;
-    background-image: url("https://initiate.alphacoders.com/images/818/cropped-1280-768-81856.jpg?9463");
+    background-image: url("https://images4.alphacoders.com/818/81856.jpg");
+    background-size: 1365px, 678px;
     padding-top: 200px;
+}
+
+.title img {
 }
 
 .hero h1 {
