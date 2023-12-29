@@ -42,6 +42,11 @@ $(document).ready(function (e) {
 
         // Function to display search results in the DOM
         function displaySearchResults(results) {
+            // Select the container for recommended movies
+            const recommendedMoviesDiv = $('#recommendedMovies');
+            recommendedMoviesDiv.empty(); // Clear any previous recommendations
+
+            // Select the container for search results
             const searchResultsDiv = $('#searchResults');
             searchResultsDiv.empty(); // Clear any previous search results
 
@@ -104,9 +109,10 @@ $(document).ready(function (e) {
             .then((data) => {
 
                 const recommendations = data.related;
+                // If recommendations is an array 
                 if (Array.isArray(recommendations)) {
-                    // If recommendations is an array
-                    displayMovieRecommendations(recommendations);
+                    const limitedRecommendations = recommendations.slice(0, 8) // Take the first 8 recommendations
+                    displayMovieRecommendations(limitedRecommendations); // Display recommendations
                 } else {
                     console.error('Invalid or empty recommendations data:', recommendations);
                     // Handle the case when recommendations are not as expected
@@ -121,6 +127,10 @@ $(document).ready(function (e) {
 
     // Function to display movie recommendations based on provided data
     function displayMovieRecommendations(recommendations) {
+        // Select the container for search results
+        const searchResultsDiv = $('#searchResults');
+        searchResultsDiv.empty(); // Clear search results
+
         // Select the container for recommended movies
         const recommendedMoviesDiv = $('#recommendedMovies');
         recommendedMoviesDiv.empty(); // Clear any previous recommendations
@@ -187,12 +197,6 @@ $(document).ready(function (e) {
                     // Show the modal
                     $('#videoModal').modal('show');
 
-                    // Create a new YouTube player when the modal is shown
-                    youtubePlayer = new YT.Player('videoPlayer', {
-                        events: {
-                            'onReady': onPlayerReady
-                        }
-                    });
                 } else {
                     console.error('No trailer available for this movie.');
                     // Log error when there's no trailer available
@@ -209,12 +213,6 @@ $(document).ready(function (e) {
         const movieTitle = $(this).attr('alt');
         playMovieTrailer(movieTitle);
     });
-
-
-    function onPlayerReady(event) {
-
-        event.target.playVideo();
-    }
 
     // Stop video playing when Modal is closed
     $('#videoModal').on('hidden.bs.modal', function () {
