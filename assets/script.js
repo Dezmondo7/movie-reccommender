@@ -76,7 +76,8 @@ $(document).ready(function (e) {
             const limitedResults = results.slice(0, 6) // Display the first 6 results
             // Create a list to hold the search result images
             const resultList = $('<ul></ul>').css('list-style', 'none').css('padding', '0').css('margin', '0');
-
+            const row1 = $('<div class="row1"></div>'); // Create a row for the first 4 posters
+            const row2 = $('<div class="row2"></div>'); // Create a row for the next 4 posters
             // Iterate through the results and create list items with movie posters
             $.each(limitedResults, function (index, movie) {
                 if (movie.poster_path) {
@@ -91,12 +92,18 @@ $(document).ready(function (e) {
                                 .attr('alt', movie.title)
                                 .data('tmdb-id', movie.id)
                         );
-                    resultList.append(listItem);
+                    // Append posters to rows based on index
+                    if (index < 3) {
+                        row1.append(listItem);
+                    } else {
+                        row2.append(listItem);
+                    }
                 }
+                // Append the list of movie posters to the search results container
+                resultList.append(row1, row2);
+                searchResultsDiv.append(resultList);
             });
 
-            // Append the list of movie posters to the search results container
-            searchResultsDiv.append(resultList);
         }
     }
 
@@ -160,9 +167,10 @@ $(document).ready(function (e) {
 
         // Create a list to hold recommended movies' posters
         const resultList = $('<ul></ul>').css('list-style', 'none').css('padding', '0').css('margin', '0');
-
         // Create Heading Tags for Recommended Movies
         const recommendationHeadingEl = $('<h4></h4>').attr('id', 'recommendationHeading').text('Movie Recommendations: ')
+        const row1 = $('<div class="row1"></div>'); // Create a row for the first 4 posters
+        const row2 = $('<div class="row2"></div>'); // Create a row for the next 4 posters
 
         // Loop through the recommendations to create list items with movie posters
         for (let i = 0; i < recommendations.length; i++) {
@@ -173,21 +181,26 @@ $(document).ready(function (e) {
 
                 const imageUrl = `https://image.tmdb.org/t/p/w200${movie.tmdb_poster_path}`;
 
-                const listItem = $('<li></li>')
-                    .css('display', 'inline-block')
-                    .css('margin', '5px')
-                    .append(
-                        $('<img>')
-                            .addClass('movie-poster')
-                            .attr('src', imageUrl)
-                            .attr('alt', movie.title)
-                            .data('imdb-id', imdbId)
-                    );
+                const listItem = $('<li></li>').append(
+                    $('<img>')
+                        .addClass('movie-poster')
+                        .attr('src', imageUrl)
+                        .attr('alt', movie.title)
+                        .data('imdb-id', imdbId)
+                );
 
-                resultList.append(listItem);
+                // Append posters to rows based on index
+                if (i < 4) {
+                    row1.append(listItem);
+                } else {
+                    row2.append(listItem);
+                }
+
             }
         }
 
+        // Append rows to the result list
+        resultList.append(row1, row2);
         recommendedMoviesDiv.append(recommendationHeadingEl, resultList); // Append the list of movie posters to the container
     }
 
@@ -195,7 +208,7 @@ $(document).ready(function (e) {
     // Function to play the movie trailer from YouTube Data API
     function playMovieTrailer(movieTitle) {
 
-        const apiKey = 'AIzaSyCcPVu4WsL8xwD6Av-xZ4KeuO6TnD2_fo8';
+        const apiKey = 'AIzaSyBzBmmP2hecqGCQDGiNYnq92Ea6foRIdms';
         const encodedTitle = encodeURIComponent(movieTitle);
         const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodedTitle}+trailer&key=${apiKey}`;
 
@@ -204,6 +217,7 @@ $(document).ready(function (e) {
                 return response.json();
             })
             .then((data) => {
+                console.log(data);
                 // Check if there are any video results
                 if (data.items && data.items.length > 0) {
                     const videoId = data.items[0].id.videoId; // Get the video ID of the first result
@@ -306,17 +320,6 @@ $(document).ready(function (e) {
                 '<i class="material-symbols-outlined">close</i></a>' +
                 '</div>');
 
-
-
-            // watchlistDiv.append('<div class="overlay">' +
-            //     '<a href="https://www.imdb.com/title/' + movieInfo.imdbId + '" target="_blank">' +
-            //     '<i class="material-symbols-outlined">IMDb</i></a>' +
-            //     '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
-            //     '<i class="material-symbols-outlined">play_arrow</i></a>' +
-            //     '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
-            //     '<i class="material-symbols-outlined">close</i></a>' +
-            //     '</div>');
-
             // Attach event listeners
             attachEventListeners(watchlistDiv, movieInfo);
 
@@ -325,7 +328,7 @@ $(document).ready(function (e) {
     }
 
     // Event listener to clear watchlist
-    $("#clear-watchlist").on("click", function(){
+    $("#clear-watchlist").on("click", function () {
         localStorage.clear();
         $('#watchlist-container').empty();
     });

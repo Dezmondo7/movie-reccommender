@@ -147,6 +147,25 @@ body {
     cursor: pointer;
 }
 
+#recommendedMovies ul,
+#searchResults ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.row1,
+.row2 {
+  display: flex;
+  gap: 1rem;
+}
+
+.movie-poster:hover {
+  cursor: pointer;
+}
+
 .img-gallery {
     width: 90%;
     margin: 25px auto 50px;
@@ -162,19 +181,19 @@ body {
 }
 
 #watchlist-head {
-    background-color: #333;
+  background-color: #333;
 }
 
 #watchlist-head h3 {
-    font-family: 'Poppins', sans-serif;
-    -webkit-text-stroke-width: 0.3px;
-    -webkit-text-stroke-color: white;
-    background-color: transparent;
-    font-size: 40px;
-    font-weight: 700;
-    padding: 20px;
-    letter-spacing: 5px;
-    text-align: center;
+  font-family: 'Poppins', sans-serif;
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: white;
+  background-color: transparent;
+  font-size: 40px;
+  font-weight: 700;
+  padding: 20px;
+  letter-spacing: 5px;
+  text-align: center;
 }
 
 #watchlist-head p {
@@ -194,7 +213,7 @@ body {
 
 
 #watchlist-head p:hover {
-    color: orange;
+  color: orange;
 }
 
 #watchlist-head p:hover+.hide {
