@@ -4,6 +4,10 @@
   font-family: sans-serif;
 }
 
+body {
+  background-color: black;
+}
+
 .lists li {
   display: inline-flex;
   justify-content: center;
@@ -29,7 +33,8 @@
   height: 100vh;
   background: #292929;
   background-image: url("https://images4.alphacoders.com/818/81856.jpg");
-  background-size: 1365px, 678px;
+  background-repeat: no-repeat;
+  background-size: 100%;
   padding-top: 200px;
   position: relative;
 }
