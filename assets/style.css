@@ -142,6 +142,36 @@ body {
   cursor: pointer;
 }
 
+#watchlist-head {
+    background-color: #333;
+}
+
+#watchlist-head h3 {
+    font-family: 'Poppins', sans-serif;
+    -webkit-text-stroke-width: 0.3px;
+    -webkit-text-stroke-color: white;
+    background-color: transparent;
+    font-size: 40px;
+    font-weight: 700;
+    padding: 20px;
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+#watchlist-head p {
+    font-family: roboto;
+    color: #FFFFFF;
+    font-weight: 100;
+    font-size: medium;
+    float: right;
+    cursor: pointer;
+    padding: 20px;
+}
+
+#watchlist-head p:hover {
+    color: orange;
+}
+
 section.scroll-container {
   background-color: #333;
   overflow: auto;
