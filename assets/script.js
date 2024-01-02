@@ -308,6 +308,13 @@ $(document).ready(function (e) {
         });
     }
 
+    // Event listener to clear watchlist
+    $("#clear-watchlist").on("click", function(){
+        localStorage.clear();
+        $('#watchlist-container').empty();
+    });
+
+
     // Event listener for "Add to Watchlist" button in the modal
     $('#myWatchlist').click(function () {
         // Retrieve movie information from the modal's data attributes
