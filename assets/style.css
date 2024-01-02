@@ -155,8 +155,9 @@ section.scroll-container {
 
 .image {
   display: block;
-  width: 100%;
+  width: 200px;
   height: auto;
+  padding-left: 5px;
 
 }
 
@@ -201,7 +202,9 @@ section.scroll-container {
 #search-form {
   padding: 2rem;
   font-size: xx-large;
-  background-color: #292929;
+  background-color: transparent;
+  position: relative;
+  bottom: 225px;
 }
 
 .form-row label {
@@ -270,4 +273,18 @@ footer {
   font-weight: 100;
   font-family: roboto;
   font-size: small;
+}
+
+/*Tablet Design*/
+
+@media only screen and (max-width: 842px) {
+
+  #search-form {
+    padding: 2rem;
+    font-size: xx-large;
+    background-color: black;
+    position: relative;
+    bottom: 100px;
+  }
+
 }
