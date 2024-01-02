@@ -249,6 +249,7 @@ section.scroll-container {
     width: 200px;
     height: auto;
     margin: 10px;
+    padding: 10px;
 }
 
 .overlay {
@@ -258,7 +259,7 @@ section.scroll-container {
     background: rgba(0, 0, 0, 0.5);
     /* Black see-through */
     color: #f1f1f1;
-    width: 100%;
+    width: 180px;
     transition: .5s ease;
     opacity: 0;
     color: white;
@@ -268,7 +269,7 @@ section.scroll-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 20px;
 }
 
 .image:hover {
