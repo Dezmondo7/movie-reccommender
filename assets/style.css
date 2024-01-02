@@ -228,6 +228,7 @@ section.scroll-container {
 }
 
 a {
+
   color: #FFFFFF;
   text-decoration: none;
 }
@@ -263,4 +264,10 @@ footer {
   color: white;
   text-decoration: none;
   padding-bottom: 2rem;
+}
+
+#copyright p {
+  font-weight: 100;
+  font-family: roboto;
+  font-size: small;
 }
