@@ -128,6 +128,25 @@ body {
   -webkit-text-stroke-color: #e8ffcd;
 }
 
+#recommendedMovies ul,
+#searchResults ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.row1,
+.row2 {
+  display: flex;
+  gap: 1rem;
+}
+
+.movie-poster:hover {
+  cursor: pointer;
+}
+
 .img-gallery {
   width: 90%;
   margin: 25px auto 50px;
