@@ -195,7 +195,7 @@ $(document).ready(function (e) {
     // Function to play the movie trailer from YouTube Data API
     function playMovieTrailer(movieTitle) {
 
-        const apiKey = 'AIzaSyCq21SQXVzzJoeJI6DDRIgKZNtaAtLUUt0';
+        const apiKey = 'AIzaSyCcPVu4WsL8xwD6Av-xZ4KeuO6TnD2_fo8';
         const encodedTitle = encodeURIComponent(movieTitle);
         const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodedTitle}+trailer&key=${apiKey}`;
 
