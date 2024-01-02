@@ -20,6 +20,23 @@ $(document).ready(function (e) {
         getMovieRecommendations(movieId);
     });
 
+    // function to get imdb ID asynchronously using async/await
+    async function getIMDB_ID(movieId) {
+        const apiKey = '06913f82fcdc1886d498b562028e1b66';
+        let url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data.imdb_id;
+        } catch (error) {
+            console.error('Error fetching IMDb ID:', error);
+            return null;
+        }
+    }
+
+
+
     // Function to search for movies using the TMDB API
     function searchMovie(movieName, movieYear) {
         const apiKey = '06913f82fcdc1886d498b562028e1b66';
@@ -126,7 +143,7 @@ $(document).ready(function (e) {
     }
 
     // Function to display movie recommendations based on provided data
-    function displayMovieRecommendations(recommendations) {
+    async function displayMovieRecommendations(recommendations) {
         // Select the container for search results
         const searchResultsDiv = $('#searchResults');
         searchResultsDiv.empty(); // Clear search results
@@ -148,27 +165,28 @@ $(document).ready(function (e) {
         const recommendationHeadingEl = $('<h4></h4>').attr('id', 'recommendationHeading').text('Movie Recommendations: ')
 
         // Loop through the recommendations to create list items with movie posters
-        $.each(recommendations, function (index, movie) {
-            // Check if the movie has a poster path available
+        for (let i = 0; i < recommendations.length; i++) {
+            const movie = recommendations[i];
+
             if (movie.tmdb_poster_path) {
-                // Create the image URL using the movie's poster path
+                const imdbId = await getIMDB_ID(movie.tmdb_id);
+
                 const imageUrl = `https://image.tmdb.org/t/p/w200${movie.tmdb_poster_path}`;
 
-                // Create a list item to hold the movie poster image
                 const listItem = $('<li></li>')
                     .css('display', 'inline-block')
                     .css('margin', '5px')
                     .append(
-                        // Create an image element for the movie poster
                         $('<img>')
                             .addClass('movie-poster')
                             .attr('src', imageUrl)
                             .attr('alt', movie.title)
-                            .data('tmdb-id', movie.tmdb_id) // Store the movie ID as data attribute
+                            .data('imdb-id', imdbId)
                     );
-                resultList.append(listItem); // Append each movie poster to the list
+
+                resultList.append(listItem);
             }
-        });
+        }
 
         recommendedMoviesDiv.append(recommendationHeadingEl, resultList); // Append the list of movie posters to the container
     }
@@ -211,13 +229,20 @@ $(document).ready(function (e) {
     // Click event for movie posters to play the trailer
     $('#recommendedMovies').on('click', 'img.movie-poster', function () {
         const movieTitle = $(this).attr('alt');
+        const imdbId = $(this).data('imdb-id');
+        const posterUrl = $(this).attr('src');
+
+        // Set the movie information in the modal attributes
+        $('#videoModal').attr('data-movie-title', movieTitle);
+        $('#videoModal').attr('data-movie-imdbId', imdbId);
+        $('#videoModal').attr('data-movie-poster', posterUrl);
         playMovieTrailer(movieTitle);
     });
 
     // Stop video playing when Modal is closed
     $('#videoModal').on('hidden.bs.modal', function () {
-        var memory = $(this).html();
-        $(this).html(memory);
+        $('#videoModal iframe').attr('src', '');
+
     });
 
     // function to save movie information to local storage
@@ -234,20 +259,40 @@ $(document).ready(function (e) {
     }
 
 
+    // Function to attach event listeners to watchlist items
+    function attachEventListeners(watchlistDiv, movieInfo) {
+        // Play movie click event
+        watchlistDiv.find('.play-movie').click(function () {
+            console.log('Play movie: ' + movieInfo.title);
+        });
+
+        // Remove from watchlist click event
+        watchlistDiv.find('.delete-movie').click(function () {
+            let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            watchlist = watchlist.filter(function (item) {
+                return item.title !== movieInfo.title;
+            });
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+
+            // Update the display
+            displayWatchlist();
+        });
+    }
+
+
     // Function to display watchlist items in the scroll container
     function displayWatchlist() {
         var watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-
-        $('#watchlist-container').empty();
+        var watchlistContainer = $('#watchlist-container').empty();
 
         // Loop through each movie in the watchlist and add it to the scroll container
         watchlist.forEach(function (movieInfo) {
             var watchlistDiv = $('<div class="container">');
 
-            imagePoster = $('<img>')
+            var imagePoster = $('<img>')
                 .addClass('image')
                 .attr('src', movieInfo.image)
-                .attr('alt', movieInfo.title)
+                .attr('alt', movieInfo.title);
 
             watchlistDiv.append(imagePoster);
             watchlistDiv.append('<div class="overlay">' +
@@ -257,54 +302,43 @@ $(document).ready(function (e) {
                 '<i class="material-symbols-outlined">close</i></a>' +
                 '</div>');
 
+            // Attach event listeners
+            attachEventListeners(watchlistDiv, movieInfo);
 
-            // needs more work
-            watchlistDiv.find('.play-movie').click(function () {
-
-                console.log('Play movie: ' + movieInfo.title);
-            });
-
-            // Event listener for removing movies from watchlist
-            watchlistDiv.find('.delete-movie').click(function () {
-                watchlist = watchlist.filter(function (item) {
-                    return item.title !== movieInfo.title;
-                });
-                localStorage.setItem('watchlist', JSON.stringify(watchlist));
-
-                // Update the display
-                displayWatchlist();
-            })
-
-            $('#watchlist-container').append(watchlistDiv)
-
-
+            watchlistContainer.append(watchlistDiv);
         });
     }
 
     // Event listener for "Add to Watchlist" button in the modal
     $('#myWatchlist').click(function () {
-        // Get movie information from the modal (you may need to adjust this part based on your modal structure)
-        var movieInfo = {
-            title: $('#videoModalLabel').text(),
-            image: $('#recommendedMovies img.movie-poster').attr('src')
-        };
+        // Retrieve movie information from the modal's data attributes
+        var movieTitle = $('#videoModal').attr('data-movie-title');
+        var imdbId = $('#videoModal').attr('data-movie-imdbId');
+        var posterUrl = $('#videoModal').attr('data-movie-poster');
 
-        // Save the movie information to local storage
-        saveToLocalStorage(movieInfo);
+        if (movieTitle && imdbId && posterUrl) {
+            // Create movieInfo object with the retrieved information
+            var movieInfo = {
+                title: movieTitle,
+                imdbId: imdbId,
+                image: posterUrl
+            };
 
-        // Display the updated watchlist
-        displayWatchlist();
+            // Save the movie information to local storage
+            saveToLocalStorage(movieInfo);
 
-        alert('Movie added to watchlist!');
+            // Display the updated watchlist
+            displayWatchlist();
 
-
+            alert('Movie added to watchlist!');
+        } else {
+            // Handle the case where movie information is incomplete or missing
+            alert('Incomplete movie information. Cannot add to watchlist.');
+        }
     });
 
 
     displayWatchlist();
-
-
-
 
 
     // trigger Tooltip
