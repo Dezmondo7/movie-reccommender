@@ -69,7 +69,7 @@ $(document).ready(function (e) {
 
             // If no results are found, display a message
             if (results.length === 0) {
-                searchResultsDiv.text('No results found.');
+                searchResultsDiv.text('No results found.').css("color", "white");
                 return;
             }
 
@@ -323,6 +323,13 @@ $(document).ready(function (e) {
             watchlistContainer.append(watchlistDiv);
         });
     }
+
+    // Event listener to clear watchlist
+    $("#clear-watchlist").on("click", function(){
+        localStorage.clear();
+        $('#watchlist-container').empty();
+    });
+
 
     // Event listener for "Add to Watchlist" button in the modal
     $('#myWatchlist').click(function () {
