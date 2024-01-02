@@ -203,11 +203,32 @@ section.scroll-container {
   }
 
 #search-form {
-    border-radius: 5px;
-    margin: 2rem;
-    padding: 1rem;
+    padding: 2rem;
     font-size: xx-large;
-    font-family: monospace;
+    background-color: #292929;
+}
+
+.form-row label {
+    font-family: roboto;
+    color: #FFFFFF;
+    font-weight: 100;
+}
+
+.form-row input {
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.form-row button {
+    border-radius: 20px;
+    background-color: orangered;
+    border: none;
+    margin: 5px;
+}
+
+.form-row button:hover {
+    background-color: orange;
+    font-size: large;
 }
 
  a {

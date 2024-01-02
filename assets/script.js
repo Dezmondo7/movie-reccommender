@@ -69,7 +69,7 @@ $(document).ready(function (e) {
 
             // If no results are found, display a message
             if (results.length === 0) {
-                searchResultsDiv.text('No results found.');
+                searchResultsDiv.text('No results found.').css("color", "white");
                 return;
             }
 
