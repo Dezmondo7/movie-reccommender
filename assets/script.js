@@ -291,15 +291,31 @@ $(document).ready(function (e) {
             var imagePoster = $('<img>')
                 .addClass('image')
                 .attr('src', movieInfo.image)
+                .attr('data-imdb', movieInfo.imdbId)
                 .attr('alt', movieInfo.title);
 
-            watchlistDiv.append(imagePoster);
-            watchlistDiv.append('<div class="overlay">' +
+            // watchlistDiv.append(imagePoster);
+            watchlistDiv.append(
+                '<img class="image" src="' + movieInfo.image + '" alt="' + movieInfo.title + '">' +
+                '<div class="overlay">' +
+                '<a href="https://www.imdb.com/title/' + movieInfo.imdbId + '" target="_blank">' +
+                '<i class="fa fa-imdb fa-2x imdb-icon"></i></a>' +
                 '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
                 '<i class="material-symbols-outlined">play_arrow</i></a>' +
                 '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
                 '<i class="material-symbols-outlined">close</i></a>' +
                 '</div>');
+
+
+
+            // watchlistDiv.append('<div class="overlay">' +
+            //     '<a href="https://www.imdb.com/title/' + movieInfo.imdbId + '" target="_blank">' +
+            //     '<i class="material-symbols-outlined">IMDb</i></a>' +
+            //     '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
+            //     '<i class="material-symbols-outlined">play_arrow</i></a>' +
+            //     '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
+            //     '<i class="material-symbols-outlined">close</i></a>' +
+            //     '</div>');
 
             // Attach event listeners
             attachEventListeners(watchlistDiv, movieInfo);
