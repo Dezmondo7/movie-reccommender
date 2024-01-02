@@ -192,7 +192,6 @@ $(document).ready(function (e) {
     }
 
 
-    let youtubePlayer = null; // Define a global variable to store the YouTube player reference
     // Function to play the movie trailer from YouTube Data API
     function playMovieTrailer(movieTitle) {
 
