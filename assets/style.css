@@ -208,7 +208,6 @@ section.scroll-container {
     padding: 1rem;
     font-size: xx-large;
     font-family: monospace;
-
 }
 
  a {
@@ -217,6 +216,27 @@ section.scroll-container {
   text-decoration: none;
 } 
 
+footer {
+    background: #292929;
+    align-items: center;
+}
 
+#footer-list { 
+    text-align: center;
+}
 
+#footer-menu-item {
+    display: inline-block;
+    padding: 20px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
 
+#copyright { 
+    text-align: center;
+    color: white;
+    text-decoration: none;  
+    font-family: sans-serif;
+    font-weight: lighter;
+}
