@@ -219,6 +219,8 @@ section.scroll-container {
 footer {
     background: #292929;
     align-items: center;
+    font-weight: 100;
+    font-family: roboto;
 }
 
 #footer-list { 
@@ -229,14 +231,26 @@ footer {
     display: inline-block;
     padding: 20px;
     text-decoration: none;
-    font-family: sans-serif;
-    font-weight: lighter;
+}
+
+#footer-menu-item a span {
+    font-weight: 100;
+    font-family: roboto;
+}
+
+#footer-menu-item a:hover {
+    text-decoration: none;
 }
 
 #copyright { 
     text-align: center;
     color: white;
-    text-decoration: none;  
-    font-family: sans-serif;
-    font-weight: lighter;
+    text-decoration: none;
+    padding-bottom: 2rem;
+}
+
+#copyright p {
+    font-weight: 100;
+    font-family: roboto;
+    font-size: small;
 }
