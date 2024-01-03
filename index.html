@@ -44,73 +44,76 @@
   </div>
   </div>
   <!--Header-->
-  <div class="hero">
-    <div class="title">
-      <h1><i class="fa-solid fa-film" style="color: #FFFDD0"></i>FLICK</h1>
-      <div class="background-text">
-        <span>F</span>
-        <span>I</span>
-        <span>N</span>
-        <span>D</span>
-        <span>E</span>
-        <span>R</span>
-      </div>
-    </div>
-  </div>
+  <div class="background-container">
 
-  <!-- create search form element -->
-  <section id="search-form">
-    <form>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="movieNameInput">&nbsp &nbsp The movie you loved:</label>
-          <input type="text" class="form-control" id="movieNameInput" placeholder="The Matrix">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="movieYearInput">&nbsp &nbsp The year it came out:</label>
-          <div class="form-row">
-            <input type="text" class="form-control col-md-8" id="movieYearInput" placeholder="1999">
-            <button id=searchButton type="button" class="btn btn-primary col-md-3">Search</button>
-          </div>
-        </div>
-
-      </div>
-
-    </form>
-  </section>
-  <div id="searchResults"></div>
-  <div id="recommendedMovies"></div>
-
-
-  <!-- Modal Form-->
-  <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="videoModalLabel">The Creator (Video Name/Title)</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe id="videoPlayer" class="embed-responsive-item" src="https://www.youtube.com/embed/6MUcuqbGTxc"
-              allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="myWatchlist">Add to Watchlist</button>
+    <div class="hero">
+      <div class="title">
+        <h1><i class="fa-solid fa-film" style="color: #FFFDD0"></i>FLICK</h1>
+        <div class="background-text">
+          <span>F</span>
+          <span>I</span>
+          <span>N</span>
+          <span>D</span>
+          <span>E</span>
+          <span>R</span>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="watchlist-head">
-    <p id="clear-watchlist"><i class="material-symbols-outlined">close</i>
-    </p>
-    <div class="hide">Clear Watchlist</div>
-    <h3 id="watchlist-header"> MY WATCHLIST</h3>
-    <section class="scroll-container" id="watchlist-container">
+    <!-- create search form element -->
+    <section id="search-form">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="movieNameInput">&nbsp &nbsp The movie you loved:</label>
+            <input type="text" class="form-control" id="movieNameInput" placeholder="The Matrix">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="movieYearInput">&nbsp &nbsp The year it came out:</label>
+            <div class="form-row">
+              <input type="text" class="form-control col-md-8" id="movieYearInput" placeholder="1999">
+              <button id=searchButton type="button" class="btn btn-primary col-md-3">Search</button>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
     </section>
+    <div id="searchResults"></div>
+    <div id="recommendedMovies"></div>
+
+
+    <!-- Modal Form-->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="videoModalLabel">The Creator (Video Name/Title)</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe id="videoPlayer" class="embed-responsive-item" src="https://www.youtube.com/embed/6MUcuqbGTxc"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="myWatchlist">Add to Watchlist</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="watchlist-head">
+      <p id="clear-watchlist"><i class="material-symbols-outlined">close</i>
+      </p>
+      <div class="hide">Clear Watchlist</div>
+      <h3 id="watchlist-header"> MY WATCHLIST</h3>
+      <section class="scroll-container" id="watchlist-container">
+      </section>
+    </div>
   </div>
 
 
@@ -128,8 +131,6 @@
       <p>©&nbsp;2023-2024 POD 12: Yasser, Dale, Gregory, Emmanuel & Lydia</p>
     </div>
   </footer>
-
-
   <!-- jQuery JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
     integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>

@@ -1,5 +1,6 @@
-// Extra api key:
-// Youtube data api: AIzaSyCcPVu4WsL8xwD6Av-xZ4KeuO6TnD2_fo8
+// Extra api keys:
+// Youtube data: AIzaSyCcPVu4WsL8xwD6Av-xZ4KeuO6TnD2_fo8
+// Youtube data: AIzaSyA4yEGIBSEOaFSVznZV2CZ63py3QzAVbsY
 
 
 // Wait for the document to be fully loaded before executing JavaScript
@@ -66,8 +67,13 @@ $(document).ready(function (e) {
             const recommendedMoviesDiv = $('#recommendedMovies');
             recommendedMoviesDiv.empty(); // Clear any previous recommendations
 
+            // Select watchlist container
+            const watchlistEl = $('#watchlist-head');
+            watchlistEl.css('margin-top', '0') // adjust watchlist margins
+
             // Select the container for search results
             const searchResultsDiv = $('#searchResults');
+            searchResultsDiv.css({ 'margin-top': '8rem', 'margin-bottom': '4rem' }); // adjust container margins
             searchResultsDiv.empty(); // Clear any previous search results
 
             // If no results are found, display a message
@@ -154,12 +160,17 @@ $(document).ready(function (e) {
 
     // Function to display movie recommendations based on provided data
     async function displayMovieRecommendations(recommendations) {
+        // Select watchlist container
+        const watchlistEl = $('#watchlist-head');
+        watchlistEl.css('margin-top', '0') // adjust watchlist margins
+
         // Select the container for search results
         const searchResultsDiv = $('#searchResults');
         searchResultsDiv.empty(); // Clear search results
 
         // Select the container for recommended movies
         const recommendedMoviesDiv = $('#recommendedMovies');
+        recommendedMoviesDiv.css({ 'margin-top': '8rem', 'margin-bottom': '4rem' }); // adjust container margins
         recommendedMoviesDiv.empty(); // Clear any previous recommendations
 
         // Check if there are no recommendations
