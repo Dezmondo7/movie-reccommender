@@ -159,6 +159,12 @@ body {
   gap: 3rem;
 }
 
+
+#recommendationHeading {
+  color: white;
+  text-align: center;
+}
+
 .row1,
 .row2 {
   display: flex;

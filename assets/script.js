@@ -368,8 +368,8 @@ $(document).ready(function (e) {
 
             // Display the updated watchlist
             displayWatchlist();
-
-            alert('Movie added to watchlist!');
+            $('#videoModal').modal('hide');
+            scrollTo(0,1000);
         } else {
             // Handle the case where movie information is incomplete or missing
             alert('Incomplete movie information. Cannot add to watchlist.');
