@@ -73,7 +73,7 @@ $(document).ready(function (e) {
 
             // Select the container for search results
             const searchResultsDiv = $('#searchResults');
-            searchResultsDiv.css({ 'margin-top': '-10rem', 'margin-bottom': '7rem' }); // adjust container margins
+            searchResultsDiv.css({ 'margin-top': '-10rem', 'margin-bottom': '5rem' }); // adjust container margins
             searchResultsDiv.empty(); // Clear any previous search results
 
             // If no results are found, display a message
@@ -166,6 +166,7 @@ $(document).ready(function (e) {
 
         // Select the container for search results
         const searchResultsDiv = $('#searchResults');
+        searchResultsDiv.css({ 'margin-top': '0', 'margin-bottom': '0' }); // adjust container margins
         searchResultsDiv.empty(); // Clear search results
 
         // Select the container for recommended movies
