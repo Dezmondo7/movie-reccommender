@@ -1,3 +1,6 @@
+// Extra api key:
+// Youtube data api: AIzaSyCcPVu4WsL8xwD6Av-xZ4KeuO6TnD2_fo8
+
 
 // Wait for the document to be fully loaded before executing JavaScript
 $(document).ready(function (e) {
