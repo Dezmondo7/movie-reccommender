@@ -128,6 +128,11 @@ body {
   -webkit-text-stroke-color: #e8ffcd;
 }
 
+#recommendationHeading {
+  color: white;
+  text-align: center;
+}
+
 #recommendedMovies ul,
 #searchResults ul {
   display: flex;

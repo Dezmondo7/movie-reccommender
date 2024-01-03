@@ -73,7 +73,7 @@ $(document).ready(function (e) {
 
             // Select the container for search results
             const searchResultsDiv = $('#searchResults');
-            searchResultsDiv.css({ 'margin-top': '8rem', 'margin-bottom': '4rem' }); // adjust container margins
+            searchResultsDiv.css({ 'margin-top': '-10rem', 'margin-bottom': '7rem' }); // adjust container margins
             searchResultsDiv.empty(); // Clear any previous search results
 
             // If no results are found, display a message
@@ -170,7 +170,7 @@ $(document).ready(function (e) {
 
         // Select the container for recommended movies
         const recommendedMoviesDiv = $('#recommendedMovies');
-        recommendedMoviesDiv.css({ 'margin-top': '8rem', 'margin-bottom': '4rem' }); // adjust container margins
+        recommendedMoviesDiv.css({ 'margin-top': '-10rem', 'margin-bottom': '1rem' }); // adjust container margins
         recommendedMoviesDiv.empty(); // Clear any previous recommendations
 
         // Check if there are no recommendations
@@ -369,7 +369,7 @@ $(document).ready(function (e) {
             // Display the updated watchlist
             displayWatchlist();
             $('#videoModal').modal('hide');
-            scrollTo(0,1000);
+            scrollTo(0, 1000);
         } else {
             // Handle the case where movie information is incomplete or missing
             alert('Incomplete movie information. Cannot add to watchlist.');
