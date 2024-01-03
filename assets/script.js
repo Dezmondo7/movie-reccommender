@@ -232,7 +232,6 @@ $(document).ready(function (e) {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
                 // Check if there are any video results
                 if (data.items && data.items.length > 0) {
                     const videoId = data.items[0].id.videoId; // Get the video ID of the first result
