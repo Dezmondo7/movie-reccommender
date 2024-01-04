@@ -330,7 +330,7 @@ $(document).ready(function (e) {
                 '<i class="fa fa-imdb fa-2x imdb-icon"></i></a>' +
                 '<a href="#" data-bs-toggle="tooltip" title="Play Movie" class="play-movie">' +
                 '<i class="material-symbols-outlined">play_arrow</i></a>' +
-                '<a href="#" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
+                '<a href="javascript:void(0)" data-bs-toggle="tooltip" title="Remove From Watchlist" class="delete-movie">' +
                 '<i class="material-symbols-outlined">close</i></a>' +
                 '</div>');
 
